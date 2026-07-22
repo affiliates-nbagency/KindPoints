@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Kind Club — Así funciona</title>
+<style>
+  :root{
+    --off-black:#2E2A39; --off-white:#F7F5F0; --white:#FFFFFF;
+    --ink-700:#514E5C; --ink-500:#807D88; --ink-300:#BDBBC2;
+    --line:#E7E4DD;
+    --mint:#A8E6C7; --focus:#CC85D1; --sun:#FA9442; --energy:#FAED8F; --pink:#D94D99; --blue:#8FB8E8;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--off-white); color:var(--off-black);
+    font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.45;
+  }
+  .page{max-width:920px;margin:0 auto;padding:56px 40px 80px;}
+
+  .eyebrow{
+    font-size:14px; font-weight:600; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--ink-500); margin:0 0 8px;
+  }
+  h1{font-size:46px; font-weight:800; letter-spacing:-.02em; margin:0 0 6px;}
+  .subtitle{font-size:19px; color:var(--ink-700); margin:0 0 30px;}
+
+  .rule-banner{
+    background:var(--off-black); color:var(--off-white);
+    border-radius:18px; padding:22px 28px; font-size:19px; font-weight:600;
+    margin-bottom:40px; display:flex; align-items:center; gap:14px;
+  }
+  .rule-banner span.tag{color:var(--mint); font-weight:800;}
+
+  h2{font-size:27px; font-weight:700; margin:0 0 6px; letter-spacing:-.01em;}
+  .section-note{font-size:15px; color:var(--ink-700); margin:0 0 18px;}
+  section{margin-bottom:44px;}
+
+  /* Step 1-2-3 */
+  .steps{display:flex; gap:16px;}
+  .step{
+    flex:1; background:var(--white); border-radius:16px; padding:22px 20px;
+    border-top:5px solid var(--focus);
+  }
+  .step:nth-child(2){border-top-color:var(--sun);}
+  .step:nth-child(3){border-top-color:var(--mint);}
+  .step .num{font-size:13px; font-weight:700; color:var(--ink-500); letter-spacing:.08em;}
+  .step .txt{font-size:17px; font-weight:600; margin-top:6px;}
+
+  /* KP table */
+  .kp-table{background:var(--white); border-radius:18px; padding:6px 26px;}
+  .kp-row{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:15px 0; border-bottom:1px solid var(--line); font-size:16px; gap:12px;
+  }
+  .kp-row:last-child{border-bottom:none;}
+  .kp-row .lbl small{display:block; font-size:12px; color:var(--ink-500); font-weight:400; margin-top:2px;}
+  .kp-row .pts{font-size:21px; font-weight:800; white-space:nowrap;}
+  .kp-row.highlight{
+    background:linear-gradient(90deg, transparent, rgba(204,133,209,.12));
+    border-radius:10px; margin:0 -14px; padding:15px 14px; border-bottom:none;
+  }
+  .kp-row.highlight .pts{color:var(--focus);}
+  .kp-row.bonus .pts{color:#2E8A5B;}
+  .kp-row.gold .pts{color:#C7871E;}
+
+  .kp-cap{
+    display:flex; gap:16px; align-items:center; margin-top:16px;
+    background:var(--off-black); color:var(--off-white); border-radius:16px; padding:16px 22px;
+  }
+  .kp-cap .num{font-size:38px; font-weight:800; color:var(--mint); line-height:1;}
+  .kp-cap .lbl{font-size:14px; color:var(--ink-300);}
+  .kp-cap .desc{font-size:15px; color:var(--ink-300); line-height:1.4;}
+
+  /* Escalation bar for video bonus */
+  .streak{display:flex; gap:8px; align-items:flex-end; margin-top:18px;}
+  .streak .blk{flex:1; text-align:center;}
+  .streak .bar{border-radius:8px 8px 0 0; background:var(--ink-300);}
+  .streak .blk.min .bar{height:24px;}
+  .streak .blk.v4 .bar{height:44px; background:var(--mint);}
+  .streak .blk.v5 .bar{height:64px; background:var(--blue);}
+  .streak .blk.v6 .bar{height:88px; background:var(--focus);}
+  .streak .blk.v7 .bar{height:116px; background:var(--pink);}
+  .streak .blk .n{font-size:13px; font-weight:700; margin-top:6px;}
+  .streak .blk .p{font-size:12px; color:var(--ink-500);}
+  .streak .blk.v5{position:relative;}
+  .streak .blk.v5::before{
+    content:"🔥 el punto dulce";
+    position:absolute; top:-26px; left:50%; transform:translateX(-50%);
+    font-size:11px; font-weight:700; color:var(--focus); white-space:nowrap;
+  }
+
+  /* Ladder */
+  .ladder{display:flex; align-items:flex-end; gap:10px; margin-top:20px;}
+  .rung{flex:1; text-align:center;}
+  .rung .bar{border-radius:10px 10px 0 0; margin-bottom:8px;}
+  .rung .kp{font-size:13px; font-weight:700; color:var(--ink-500);}
+  .rung .name{font-size:14px; font-weight:600; margin-top:2px;}
+  .r0 .bar{height:26px; background:var(--ink-300);}
+  .r1 .bar{height:52px; background:var(--mint);}
+  .r2 .bar{height:78px; background:var(--blue);}
+  .r3 .bar{height:104px; background:var(--focus);}
+  .r4 .bar{height:130px; background:var(--pink);}
+  .r5 .bar{height:130px; background:var(--off-black);}
+  .ladder-note{
+    margin-top:16px; background:rgba(168,230,199,.15); border:1px solid rgba(168,230,199,.5);
+    border-radius:12px; padding:14px 18px; font-size:14px; color:var(--ink-700);
+  }
+  .ladder-note b{color:#1e6b45;}
+
+  /* Weekly calendar */
+  .week{display:grid; grid-template-columns:repeat(5,1fr); gap:12px;}
+  .day{background:var(--white); border-radius:14px; padding:16px 14px; min-height:150px; display:flex; flex-direction:column;}
+  .day .d{font-size:12px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-500);}
+  .day .icon{font-size:24px; margin:8px 0 6px;}
+  .day .t{font-size:15px; font-weight:700;}
+  .day .s{font-size:13px; color:var(--ink-700); margin-top:4px;}
+  .day.mon{border-top:5px solid var(--sun);}
+  .day.tue{border-top:5px solid var(--ink-300);}
+  .day.wed{border-top:5px solid var(--focus);}
+  .day.thu{border-top:5px solid var(--mint);}
+  .day.fri{border-top:5px solid var(--pink);}
+
+  .whatsapp-note{
+    margin-top:16px; font-size:14px; color:var(--ink-700); background:#EFECE4;
+    border-radius:12px; padding:14px 18px;
+  }
+
+  .two-col{display:grid; grid-template-columns:1fr 1fr; gap:20px;}
+  .three-col{display:grid; grid-template-columns:repeat(3,1fr); gap:18px;}
+  .card{background:var(--white); border-radius:18px; padding:26px 28px;}
+  .card.dark{background:var(--off-black); color:var(--off-white);}
+  .card h3{font-size:19px; margin:0 0 4px;}
+  .card .tag{font-size:13px; color:var(--ink-500); margin-bottom:14px;}
+  .card.dark .tag{color:var(--ink-300);}
+  .card-row{display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid var(--line); font-size:15px;}
+  .card.dark .card-row{border-bottom-color:#443F52;}
+  .card-row:last-child{border-bottom:none;}
+  .card-row .pts{font-weight:800; font-size:18px;}
+  .card.dark .card-row .pts{color:var(--mint);}
+  .medal{margin-right:6px;}
+
+  /* Week pace cards */
+  .pace-card{background:var(--white); border-radius:18px; padding:24px 24px 20px; display:flex; flex-direction:column;}
+  .pace-card.fire{background:var(--off-black); color:var(--off-white); position:relative; overflow:hidden;}
+  .pace-card.fire::before{
+    content:""; position:absolute; top:-50px; right:-40px; width:160px; height:160px; border-radius:50%;
+    background:linear-gradient(135deg,var(--focus),var(--pink)); opacity:.35;
+  }
+  .pace-head{display:flex; align-items:center; gap:10px; margin-bottom:4px; position:relative;}
+  .pace-head .ic{font-size:26px;}
+  .pace-head .nm{font-size:19px; font-weight:800;}
+  .pace-tag{font-size:13px; color:var(--ink-500); margin-bottom:16px; position:relative;}
+  .pace-card.fire .pace-tag{color:var(--ink-300);}
+  .pace-list{flex:1; display:flex; flex-direction:column; gap:9px; margin-bottom:16px; position:relative;}
+  .pace-item{display:flex; justify-content:space-between; font-size:14px; gap:8px;}
+  .pace-item .k{font-weight:700; white-space:nowrap;}
+  .pace-total{
+    border-radius:12px; padding:14px 16px; text-align:center; position:relative;
+    background:var(--off-white);
+  }
+  .pace-card.fire .pace-total{background:#443F52;}
+  .pace-total .n{font-size:30px; font-weight:900; line-height:1;}
+  .pace-total .l{font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-500); margin-top:4px;}
+  .pace-card.fire .pace-total .l{color:var(--ink-300);}
+  .pace-card.slow .pace-total .n{color:var(--ink-500);}
+  .pace-card.normal .pace-total .n{color:var(--focus);}
+  .pace-card.fire .pace-total .n{color:var(--mint);}
+  .pace-overflow{font-size:11px; color:var(--ink-500); margin-top:6px;}
+  .pace-card.fire .pace-overflow{color:#CC85D1;}
+
+  .hook-headline{
+    font-size:22px; font-weight:800; text-align:center; color:var(--off-black);
+    background:linear-gradient(90deg, var(--mint), var(--blue) 45%, var(--focus) 75%, var(--pink));
+    -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+    margin:0 0 34px;
+  }
+
+  footer{
+    margin-top:52px; padding-top:24px; border-top:1px solid var(--line);
+    font-size:13px; color:var(--ink-500); text-align:center;
+  }
+
+  @media (max-width:640px){
+    .steps{flex-direction:column;}
+    .week{grid-template-columns:1fr 1fr;}
+    .two-col{grid-template-columns:1fr;}
+    .streak{flex-wrap:wrap;}
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <p class="eyebrow">Kind Patches MX · TikTok Shop</p>
+  <h1>Kind Club</h1>
+  <p class="subtitle">Damos, pero tú también das 💛 — así es como funciona el programa.</p>
+
+  <p class="hook-headline">Cada video te acerca a tu siguiente nivel. ¿Hasta dónde vas a llegar esta semana?</p>
+
+  <div class="rule-banner">
+    <span class="tag">Regla de oro:</span> sin hook aprobado, no hay cupón, ni boost, ni KP. Así de simple.
+  </div>
+
+  <section>
+    <h2>¿Cómo funciona?</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="num">PASO 1</div>
+        <div class="txt">📹 Subes tu video usando el hook aprobado de la semana</div>
+      </div>
+      <div class="step">
+        <div class="num">PASO 2</div>
+        <div class="txt">🎁 Se activa tu recompensa: cupón, boost de GMV Max y KP</div>
+      </div>
+      <div class="step">
+        <div class="num">PASO 3</div>
+        <div class="txt">🌱 Subes de nivel y desbloqueas bundles más grandes</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Kind Points (KP) — la XP del programa</h2>
+    <p class="section-note">Cada acción cumplida suma. Entre más metas alcances en la semana, más rápido subes de nivel.</p>
+    <div class="kp-table">
+      <div class="kp-row">
+        <div class="lbl">Votar por el Hook de la Semana</div>
+        <div class="pts">5</div>
+      </div>
+      <div class="kp-row">
+        <div class="lbl">Reto semanal de tu escuadra</div>
+        <div class="pts">20</div>
+      </div>
+      <div class="kp-row">
+        <div class="lbl">Entrar a un webinar <small>Academy 101 / mentor co-host</small></div>
+        <div class="pts">30</div>
+      </div>
+      <div class="kp-row highlight">
+        <div class="lbl">Video de storytelling de bundle</div>
+        <div class="pts">50</div>
+      </div>
+      <div class="kp-row">
+        <div class="lbl">Quiz Mastery <small>95–100% en tu primer intento</small></div>
+        <div class="pts">15</div>
+      </div>
+      <div class="kp-row bonus">
+        <div class="lbl">Mes 100% cumplido con el hook</div>
+        <div class="pts">+50</div>
+      </div>
+    </div>
+    <div class="kp-cap">
+      <div>
+        <div class="num">150</div>
+        <div class="lbl">tope semanal</div>
+      </div>
+      <div class="desc">El único freno del juego — protege que sigas subiendo de nivel semana tras semana, sin quemarte. Los KP nunca compran cumplimiento: sin hook, no hay puntos.</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>🔥 Bono por volumen de videos</h2>
+    <p class="section-note">Tu mínimo semanal es 3 videos con hook. Cada video extra vale <b>más</b> que el anterior — mientras más subes, más rápido se acumula.</p>
+    <div class="streak">
+      <div class="blk min"><div class="bar"></div><div class="n">1–3</div><div class="p">mínimo</div></div>
+      <div class="blk v4"><div class="bar"></div><div class="n">4to</div><div class="p">+10 KP</div></div>
+      <div class="blk v5"><div class="bar"></div><div class="n">5to</div><div class="p">+15 KP</div></div>
+      <div class="blk v6"><div class="bar"></div><div class="n">6to</div><div class="p">+20 KP</div></div>
+      <div class="blk v7"><div class="bar"></div><div class="n">7mo+</div><div class="p">+20 KP c/u</div></div>
+    </div>
+    <div class="kp-cap" style="margin-top:22px;">
+      <div>
+        <div class="num">25</div>
+        <div class="lbl">KP a los 5 videos</div>
+      </div>
+      <div class="desc">Solo por volumen — sin contar lo que ya ganas por reto de escuadra, storytelling o tu meta de ventas. Cada video que subes cuenta.</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>¿Cómo se ve tu semana?</h2>
+    <p class="section-note">El tope de 150 KP es el único freno del juego — compites contra tu propia semana, no contra quemarte.</p>
+    <div class="three-col">
+      <div class="pace-card slow">
+        <div class="pace-head"><span class="ic">🌙</span><span class="nm">Semana Lenta</span></div>
+        <div class="pace-tag">Cumples lo mínimo</div>
+        <div class="pace-list">
+          <div class="pace-item"><span>3 videos con hook</span><span class="k">mínimo</span></div>
+          <div class="pace-item"><span>Vota el Hook de la Semana</span><span class="k">5</span></div>
+        </div>
+        <div class="pace-total"><div class="n">5</div><div class="l">KP esa semana</div></div>
+      </div>
+
+      <div class="pace-card normal">
+        <div class="pace-head"><span class="ic">⚡</span><span class="nm">Semana Normal</span></div>
+        <div class="pace-tag">Participas activo</div>
+        <div class="pace-list">
+          <div class="pace-item"><span>5 videos con hook</span><span class="k">25</span></div>
+          <div class="pace-item"><span>Vota el Hook de la Semana</span><span class="k">5</span></div>
+          <div class="pace-item"><span>Reto de escuadra</span><span class="k">20</span></div>
+          <div class="pace-item"><span>Meta Bronce (5 uds.)</span><span class="k">15</span></div>
+        </div>
+        <div class="pace-total"><div class="n">65</div><div class="l">KP esa semana</div></div>
+      </div>
+
+      <div class="pace-card fire">
+        <div class="pace-head"><span class="ic">🔥</span><span class="nm">Semana On Fire</span></div>
+        <div class="pace-tag">Todo prendido</div>
+        <div class="pace-list">
+          <div class="pace-item"><span>7 videos con hook</span><span class="k">65</span></div>
+          <div class="pace-item"><span>Vota el Hook de la Semana</span><span class="k">5</span></div>
+          <div class="pace-item"><span>Reto de escuadra</span><span class="k">20</span></div>
+          <div class="pace-item"><span>Webinar</span><span class="k">30</span></div>
+          <div class="pace-item"><span>Live + meta cumplida</span><span class="k">30</span></div>
+          <div class="pace-item"><span>Meta Oro (40 uds.)</span><span class="k">65</span></div>
+        </div>
+        <div class="pace-total"><div class="n">150</div><div class="l">tope alcanzado</div></div>
+        <div class="pace-overflow">Ganaste 215 KP en acciones — el tope te protege en 150.</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Vive el reto, gana el doble</h2>
+    <div class="two-col">
+      <div class="card">
+        <h3>🎥 Live semanal</h3>
+        <div class="tag">Mínimo 20–30 min, con el hook</div>
+        <div class="card-row"><span>Hacer tu live</span><span class="pts">10</span></div>
+        <div class="card-row"><span>+ vender 5 unidades en el live</span><span class="pts">+20</span></div>
+        <div class="card-row"><span><b>Total si logras la meta</b></span><span class="pts">30</span></div>
+      </div>
+      <div class="card dark">
+        <h3>💰 Meta semanal de ventas</h3>
+        <div class="tag">Se otorga solo el nivel más alto que alcances</div>
+        <div class="card-row"><span><span class="medal">🥉</span>5 unidades — Bronce</span><span class="pts">15</span></div>
+        <div class="card-row"><span><span class="medal">🥈</span>15 unidades — Plata</span><span class="pts">35</span></div>
+        <div class="card-row"><span><span class="medal">🥇</span>40 unidades — Oro</span><span class="pts">65</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Tu escalera</h2>
+    <p class="section-note">Los KP marcan la velocidad — pero el gate abre la puerta. Cada salto de nivel sigue necesitando tu hook ratio y tu cuota de videos.</p>
+    <div class="ladder">
+      <div class="rung r0"><div class="bar"></div><div class="kp">la puerta</div><div class="name">Kind Society</div></div>
+      <div class="rung r1"><div class="bar"></div><div class="kp">400 KP</div><div class="name">Rising 1</div></div>
+      <div class="rung r2"><div class="bar"></div><div class="kp">1,000 KP</div><div class="name">Rising 2</div></div>
+      <div class="rung r3"><div class="bar"></div><div class="kp">2,200 KP</div><div class="name">Rising 3</div></div>
+      <div class="rung r4"><div class="bar"></div><div class="kp">invitación</div><div class="name">Talent</div></div>
+      <div class="rung r5"><div class="bar"></div><div class="kp">invitación</div><div class="name">Ambassador</div></div>
+    </div>
+    <div class="ladder-note"><b>Nunca se salta un gate</b> — los KP aceleran, pero el hook y el quiz siempre se cumplen.</div>
+  </section>
+
+  <section>
+    <h2>Calendario semanal</h2>
+    <div class="week">
+      <div class="day mon">
+        <div class="d">Lunes</div>
+        <div class="icon">🎙</div>
+        <div class="t">Content Fuel</div>
+        <div class="s">Brief de voz + hook estrella de la semana</div>
+      </div>
+      <div class="day tue">
+        <div class="d">Martes</div>
+        <div class="icon">💬</div>
+        <div class="t">Check-in 1:1</div>
+        <div class="s">Revisión de gates pendientes contigo</div>
+      </div>
+      <div class="day wed">
+        <div class="d">Miércoles</div>
+        <div class="icon">⚡</div>
+        <div class="t">Cápsula rápida</div>
+        <div class="s">Tip de 1 min para tu contenido</div>
+      </div>
+      <div class="day thu">
+        <div class="d">Jueves</div>
+        <div class="icon">🏆</div>
+        <div class="t">Wins Thursday</div>
+        <div class="s">Ranking de escuadra + badges</div>
+      </div>
+      <div class="day fri">
+        <div class="d">Viernes</div>
+        <div class="icon">🎉</div>
+        <div class="t">Friday Flash</div>
+        <div class="s">Reto del finde #KindFlash</div>
+      </div>
+    </div>
+    <div class="whatsapp-note">💛 Todo esto llega a tu grupo de WhatsApp — brief el lunes, recordatorio de gate el martes, y el reto de Friday Flash el viernes.</div>
+  </section>
+
+  <footer>Kind Club · Kind Patches MX — documento para creadoras del programa</footer>
+
+</div>
+</body>
+</html>
